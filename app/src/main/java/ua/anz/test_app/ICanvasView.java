@@ -6,4 +6,5 @@ package ua.anz.test_app;
 public interface ICanvasView {
     void drawCircle(SimpleCircle mainCircle);
 
+    void reDraw();
 }
