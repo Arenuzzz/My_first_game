@@ -7,4 +7,6 @@ public interface ICanvasView {
     void drawCircle(SimpleCircle mainCircle);
 
     void reDraw();
+
+    void showMessage(String text);
 }

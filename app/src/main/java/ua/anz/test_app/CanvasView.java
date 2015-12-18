@@ -6,9 +6,11 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 /**
  * Created by AreNuZzz on 15.12.2015.
@@ -19,6 +21,7 @@ public class CanvasView extends View implements ICanvasView{
     private  static int height;
     private Paint paint;
     private Canvas canvas;
+    private Toast toast;
     
     public CanvasView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -65,6 +68,17 @@ public class CanvasView extends View implements ICanvasView{
     }
 
     @Override
+    public void showMessage(String text) {
+        if(toast != null)
+        {
+            toast.cancel();
+        }
+        toast = Toast.makeText(getContext(),text,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
@@ -73,5 +87,11 @@ public class CanvasView extends View implements ICanvasView{
         }
         invalidate();
             return  true;
+    }
+    
+//Доработать
+    public static int reCalculateRadius(int redius)
+    {
+        return redius * 768 / width < height ? width : height;
     }
 }
