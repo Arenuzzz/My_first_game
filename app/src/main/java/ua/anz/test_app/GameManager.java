@@ -27,9 +27,13 @@ public class GameManager {
     }
 
     private void initEnemyCircle() {
-       enemyCircles = new ArrayList<>();
+        SimpleCircle mainCircleArea = mainCircle.getCircleArea();
+        enemyCircles = new ArrayList<>();
         for (int i = 0; i < MAX_CIRCLES; i++) {
-            EnemyCircle circle = EnemyCircle.getRandomCircle();
+            EnemyCircle circle;
+            do {
+                circle = EnemyCircle.getRandomCircle();
+            } while (circle.isIntersect(mainCircleArea));
             enemyCircles.add(circle);
         }
         calculateAndSetCircleColor();
